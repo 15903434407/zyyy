@@ -7,22 +7,12 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
 </head>
 <body>
-    <h2>
-        <img src="{{ url_for('static',filename='images/avatar.jpg')}}" alt="头像" class="avatar">
-        {{ user.name }}
-    </h2>
-    <p>总共{{movies|length}}个电影</p>
-    <ul class="movie-list">
-        {% for movie in movies%}
-        <li>
-            {{movie.title}} - {{movie.year}}
-        </li>
-        {% endfor %}
-    </ul>
+   
+    <p>页面走丢了
+        
+    </p>
     <footer>
         <small>&copy;2020 &nbsp;&nbsp;&nbsp; <a href="#">1903</a></small>
     </footer>
 </body>
 </html>
-
-

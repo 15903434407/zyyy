@@ -44,7 +44,7 @@ class Movie(db.Model):
 
 
 def index():
-    name = "ZY"
+    # name = "ZY"
     # movies = [
     #     {'title':"a","year":"1"},
     #     {'title':"b","year":"2"},
@@ -96,3 +96,16 @@ def forge():
         db.session.add(movie)
     db.session.commit()
     click.echo("导入数据完成")
+
+
+@app.errorhandler(404)
+def page_not_found(a):
+    user = User.query.first()
+    return render_template('404.html',user=user)
+
+
+
+
+
+
+
