@@ -56,10 +56,10 @@ def index():
     #     {'title':"h","year":"8"},
     #     {'title':"i","year":"9"},
     # ]
-    user = User.query.first()  #查询用户记录
+    # user = User.query.first()  #查询用户记录
     movies = Movie.query.all()
 
-    return render_template('index.html',user=user,movies=movies)
+    return render_template('index.html',movies=movies)
 
 
 
@@ -97,14 +97,16 @@ def forge():
     db.session.commit()
     click.echo("导入数据完成")
 
-
+# 处理错误函数
 @app.errorhandler(404)
 def page_not_found(a):
+    return render_template('404.html')
+
+# 模板上下文处理函数
+@app.context_processor
+def common_user():
     user = User.query.first()
-    return render_template('404.html',user=user)
-
-
-
+    return dict(user = user)
 
 
 

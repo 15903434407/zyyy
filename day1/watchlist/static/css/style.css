@@ -28,7 +28,28 @@ footer{
     background-color: salmon;
 }
 
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.12);
+}
 
+nav li{
+    float: left;
 
+}
 
+nav li a{
+    display: block;
+    color: seashell;
+    text-align: center;
+    padding: 8px 12px;
+    text-decoration: none;
 
+}
+
+nav li a:hover{
+    background-color: slategray;
+}

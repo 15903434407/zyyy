@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user.name }}</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
-</head>
-<body>
-   
+{% extends 'base.html' %}
+
+{% block content %}
     <p>页面走丢了
         
     </p>
-    <footer>
-        <small>&copy;2020 &nbsp;&nbsp;&nbsp; <a href="#">1903</a></small>
-    </footer>
-</body>
-</html>
+    
+{% endblock %}
