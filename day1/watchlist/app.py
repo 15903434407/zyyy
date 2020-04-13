@@ -1,9 +1,11 @@
 import os,sys
 
-from flask import Flask,url_for,render_template
+from flask import Flask,url_for,render_template,request,flash,redirect
+# from werkzeug.security import generate_password_hash,check_password_hash
 from flask_sqlalchemy import SQLAlchemy
-
+# from flask_login import LoginManager,UserMixin,login_user,logout_user,login_required,current_user
 import click
+
 # 判断系统是不是以win开头的
 WIN = sys.platform.startswith('win')
 
@@ -20,8 +22,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = prifix + os.path.join(app.root_path,'dat
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+app.config['SECRET_KEY'] = '1903_dev'
+
+
 # 初始化app
 db = SQLAlchemy(app)
+
+
+
+
 
 # model数据层
 class User(db.Model):
@@ -43,23 +52,27 @@ class Movie(db.Model):
 #     return "<h1>Hello %s </h1>"%name
 
 
+@app.route('/',methods=['GET','POST'])
 def index():
-    # name = "ZY"
-    # movies = [
-    #     {'title':"a","year":"1"},
-    #     {'title':"b","year":"2"},
-    #     {'title':"c","year":"3"},
-    #     {'title':"d","year":"4"},
-    #     {'title':"e","year":"5"},
-    #     {'title':"f","year":"6"},
-    #     {'title':"g","year":"7"},
-    #     {'title':"h","year":"8"},
-    #     {'title':"i","year":"9"},
-    # ]
-    # user = User.query.first()  #查询用户记录
-    movies = Movie.query.all()
+    if request.method == 'POST':
 
+        # 获取表单的数据
+        title = request.form.get('title')
+        year = request.form.get('year')
+        # 验证数据
+        if not title or not year or len(year)>4 or len(title)>60:
+            flash('输入错误')
+            return redirect(url_for('index'))
+        # 将数据保存到数据库
+        movie = Movie(title=title,year=year) # 创建记录
+        db.session.add(movie)
+        db.session.commit()
+        flash('创建成功')
+        return redirect(url_for('index'))
+
+    movies = Movie.query.all()
     return render_template('index.html',movies=movies)
+
 
 
 
