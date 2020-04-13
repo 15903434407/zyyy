@@ -16,6 +16,9 @@
         <span class="float -right">
             <a href="https://www.ixigua.com/cinema/album/86vlJIR9quq_86vpDfx4pGD/?utm_source=dyj_pc_360pz">百度视频</a>
         </span>
+        <span class="float-right">
+            <a class="baidu" href="{{ url_for('edit',movie_id=movie.id) }}">编辑</a>
+        </span>
     </li>
     {% endfor %}
 </ul>
