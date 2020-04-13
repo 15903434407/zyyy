@@ -19,6 +19,11 @@
         <span class="float-right">
             <a class="baidu" href="{{ url_for('edit',movie_id=movie.id) }}">编辑</a>
         </span>
+        <span class="float-right">
+            <form action="{{ url_for('delete',movie_id=movie.id) }}" method="post">
+                <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确定删除吗？')">
+            </form>
+        </span>
     </li>
     {% endfor %}
 </ul>

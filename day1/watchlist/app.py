@@ -91,7 +91,13 @@ def edit(movie_id):
         return redirect(url_for('index'))
     return render_template('edit.html',movie=movie)
 
-
+@app.route('/movie/delete/<int:movie_id>',methods=['GET','POST']) 
+def delete(movie_id):
+    movie = Movie.query.get_or_404(movie_id)
+    db.session.delete(movie)
+    db.session.commit()
+    flash('删除完成')
+    return redirect(url_for('index'))
 
 #自定义命令
 
