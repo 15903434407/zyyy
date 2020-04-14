@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>总共{{movies|length}}个电影</p>
-
+<p>总共{{ movies|length }}个电影</p>
+<!-- 添加电影的表单 -->
+{% if current_user.is_authenticated %}
 <form action="" method="POST">
-    电影名称 <input type="text" name="title" required>
-    电影年份 <input type="text" name="year" required>
-    <input type="submit" value="添加">
+    电影名称 <input type="text" name="title" required autocomplete="off">
+    电影年份 <input type="text" name="year" required autocomplete="off">
+    <input class="btn" type="submit" value="添加">
 </form>
-
+{% endif %}
 <ul class="movie-list">
     {% for movie in movies%}
     <li>
-        {{movie.title}} - {{movie.year}}
-        <span class="float -right">
-            <a href="https://www.ixigua.com/cinema/album/86vlJIR9quq_86vpDfx4pGD/?utm_source=dyj_pc_360pz">百度视频</a>
+        {{ movie.title }} - {{ movie.year }}
+        <span class="float-right">
+            <a class="baidu" href="http://v.baidu.com/v?word={{ movie.title }}&ct=301989888&rn=67&pn=0&db=0&s=0&fbl=800&ie=utf-8&oq={{ movie.title }}&f=3&rsp=0" target="_blank">百度视频</a>
         </span>
+        {% if current_user.is_authenticated %}
         <span class="float-right">
             <a class="baidu" href="{{ url_for('edit',movie_id=movie.id) }}">编辑</a>
         </span>
@@ -24,8 +26,8 @@
                 <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确定删除吗？')">
             </form>
         </span>
+        {% endif %}
     </li>
     {% endfor %}
 </ul>
-
 {% endblock %}

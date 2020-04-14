@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p>页面走丢了
-        
-    </p>
-    
+<ul class="movie-list">
+    <li>
+        页面走丢啦~~~ 404
+        <a href="{{ url_for('index') }}">返回主页</a>
+    </li>
+</ul>
 {% endblock %}
